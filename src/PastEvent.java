@@ -1,14 +1,16 @@
-public class PastEvent extends Event{
+public class PastEvent{
 
+    public static final double pastEventCost = 10_000;
+    public static final double tax = 0.3;
     private String paymentStatus;
     private boolean requiresExtension;
     private String paymentDetails;
-    private double pastEventCost;
+    private String eventID;
+
+    //private double pastEventCost;
 
     public PastEvent(String eventID, String eventName, String eventLocation, String pointOfContact, int totalParticipants, int totalEventDays) {
 
-        super(eventID, eventName, eventLocation, pointOfContact, totalParticipants, totalEventDays);
-        
     }
 
     public String getPaymentStatus() {
@@ -27,10 +29,10 @@ public class PastEvent extends Event{
         this.requiresExtension = requiresExtension;
     }
 
-    @Override
-    public void calculateEventCost(){
-        super.calculateEventCost();
-        pastEventCost = getEventCost();
+    
+    public void calculateCost(){
+        double cost = 1000+ (1000 * tax);
+        
     }
 
     public void setPaymentDetails(String paymentStatus, boolean requiresExtension) {
@@ -44,13 +46,8 @@ public class PastEvent extends Event{
 
     @Override
     public String toString(){
-        return "Conference Event details: " + "\n" +
-        "Event ID: " + getEventID() + "\n" +
-        "Event Name: " + getEventName() + "\n" +
-        "Event Location: " + getEventLocation() + "\n" +
-        "Total participants: " + getTotalParticipants() + "\n" +
-        "The payment details are as follows: " + "\n" + 
-        paymentDetails;
+        return "\n"+"Event ID:" + eventID +"\n" + "The past event details: " + "\n" +
+        "The payment details are as follows:"+ "\n" +paymentDetails;
     }
     
 }

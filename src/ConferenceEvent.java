@@ -1,4 +1,4 @@
-public abstract class ConferenceEvent extends Event implements CalculateEventCostInter{
+public class ConferenceEvent{
     private boolean breakfastRequired;
     private double breakfastCost;
     private boolean lunchRequired;
@@ -6,6 +6,13 @@ public abstract class ConferenceEvent extends Event implements CalculateEventCos
     private boolean dinnerRequired;
     private double dinnerCost;
     private double conferenceEventCost;
+    private String eventID;
+    private String eventName;
+    private String eventLocation;
+    private String pointOfContact;
+    private CalculateEventCostClass calculateEventCostObject;
+    private int totalEventDays;
+    private int totalParticipants;
 
     public double getBreakfastCost(){
         return breakfastCost;
@@ -29,26 +36,30 @@ public abstract class ConferenceEvent extends Event implements CalculateEventCos
 
     public ConferenceEvent(String eventID, String eventName, String eventLocation, String pointOfContact, int totalParticipants, int totalEventDays, 
     double breakfastCost, double lunchCost, double dinnerCost){
-        super(eventID, eventName, eventLocation, pointOfContact, totalParticipants, totalEventDays);
+        this.calculateEventCostObject = new CalculateEventCostClass();
+        this.eventID = eventID;
+        this.eventName = eventName;
+        this.eventLocation = eventLocation;
+        this.pointOfContact = pointOfContact;
         this.breakfastCost = breakfastCost;
         this.lunchCost = lunchCost;
         this.dinnerCost = dinnerCost;
     }
 
 
-    @Override
+    
     public void calculateEventCost(){
-        conferenceEventCost = getEventCost() + ((breakfastCost + lunchCost + dinnerCost) * getTotalParticipants() * getTotalEventDays());
+        conferenceEventCost = calculateEventCostObject.calculateEventCost() + ((breakfastCost + lunchCost + dinnerCost) * totalParticipants * totalEventDays);
     }
 
 
     @Override
     public String toString(){
         return "Conference Event details: " + "\n" +
-        "Event ID: " + getEventID() + "\n" +
-        "Event Name: " + getEventName() + "\n" +
-        "Event Location: " + getEventLocation() + "\n" +
-        "Total participants: " + getTotalParticipants() + "\n" +
+        "Event ID: " + eventID + "\n" +
+        "Event Name: " + eventName + "\n" +
+        "Event Location: " + eventLocation + "\n" +
+        "Total participants: " + totalParticipants + "\n" +
         "Total Conference Cost: " + conferenceEventCost;
     } 
         
